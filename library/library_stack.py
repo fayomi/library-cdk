@@ -62,11 +62,9 @@ class LibraryStack(cdk.Stack):
                 status_code="200")])
 
             books.add_method("GET", get_book_integration, method_responses=[apigateway.MethodResponse(
-            # Successful response from the integration
             status_code="200"
             )]) # GET /books
             books.add_method("POST", post_book_integration, method_responses=[apigateway.MethodResponse(
-            # Successful response from the integration
             status_code="200"
             )]) 
 
