@@ -78,6 +78,7 @@ class LibraryStack(cdk.Stack):
 # ADD BOOK OWNER COLUMN F or A
 # ADD FILTER FOR F or A in search
 # ADD COLUMN FOR BORROWED AND WHO HAS IT
+# Create update book status function 
 
 # ADD API SECURITY (API KEY? COGNITO?)
 # - https://awskarthik82.medium.com/part-1-securing-aws-api-gateway-using-aws-cognito-oauth2-scopes-410e7fb4a4c0 
