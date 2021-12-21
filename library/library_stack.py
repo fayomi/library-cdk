@@ -70,8 +70,6 @@ class LibraryStack(cdk.Stack):
             status_code="200"
             )]) 
 
-
-
         post_book = post_book()
         get_books = get_books()
         create_api(get_books, post_book)
@@ -79,6 +77,9 @@ class LibraryStack(cdk.Stack):
 
 # CREATE POST AND GET FUNCTIONS
 # ADD LOCATION COLUMN FOR BOOKS (e.g here or at friends house)
+# ADD BOOK OWNER COLUMN F or A
+# ADD FILTER FOR F or A in search
+# ADD COLUMN FOR BORROWED AND WHO HAS IT
 
 # ADD API SECURITY (API KEY? COGNITO?)
 # - https://awskarthik82.medium.com/part-1-securing-aws-api-gateway-using-aws-cognito-oauth2-scopes-410e7fb4a4c0 
