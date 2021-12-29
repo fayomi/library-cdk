@@ -59,7 +59,8 @@ class LibraryStack(cdk.Stack):
             post_book_integration = apigateway.LambdaIntegration(post_fn, proxy=False, integration_responses=[apigateway.IntegrationResponse(
                 status_code="200")])
             get_book_integration = apigateway.LambdaIntegration(get_fn, proxy=False, integration_responses=[apigateway.IntegrationResponse(
-                status_code="200")])
+                status_code="200"
+                )])
 
             books.add_method("GET", get_book_integration, method_responses=[apigateway.MethodResponse(
             status_code="200"
@@ -73,6 +74,7 @@ class LibraryStack(cdk.Stack):
         create_api(get_books, post_book)
 
 
+# CREATE FRONT-END IN FLASK WITH CDK?
 # CREATE POST AND GET FUNCTIONS
 # ADD LOCATION COLUMN FOR BOOKS (e.g here or at friends house)
 # ADD BOOK OWNER COLUMN F or A
