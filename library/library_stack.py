@@ -74,7 +74,7 @@ class LibraryStack(cdk.Stack):
         create_api(get_books, post_book)
 
 
-# CREATE FRONT-END IN FLASK WITH CDK?
+# CREATE FRONT-END IN FLASK WITH SLS?
 # CREATE POST AND GET FUNCTIONS
 # ADD LOCATION COLUMN FOR BOOKS (e.g here or at friends house)
 # ADD BOOK OWNER COLUMN F or A
