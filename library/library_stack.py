@@ -74,7 +74,7 @@ class LibraryStack(cdk.Stack):
         create_api(get_books, post_book)
 
 
-# CREATE FRONT-END IN FLASK WITH SLS?
+# CREATE FRONT-END IN FLASK WITH SLS? https://www.serverless.com/blog/flask-python-rest-api-serverless-lambda-dynamodb/
 # CREATE POST AND GET FUNCTIONS
 # ADD LOCATION COLUMN FOR BOOKS (e.g here or at friends house)
 # ADD BOOK OWNER COLUMN F or A
