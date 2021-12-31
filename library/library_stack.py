@@ -32,6 +32,18 @@ class LibraryStack(cdk.Stack):
 
             return post_fn
 
+        # Create book delete function 
+        def delete_book():
+            delete_fn = lambda_.Function(self, "delete",
+            runtime=lambda_.Runtime.PYTHON_3_7,
+            handler="delete.main",
+            code=lambda_.Code.from_asset("./lambda/delete")
+        )
+            # grant reand and write permissions to the table
+            table.grant_read_write_data(delete_fn)
+            delete_fn.add_environment("TABLE_NAME", table.table_name)
+
+            return delete_fn
         
         # Create book post function 
         def get_books():
@@ -48,7 +60,7 @@ class LibraryStack(cdk.Stack):
             return get_fn
         
         # Create API function
-        def create_api(get_fn, post_fn):
+        def create_api(get_fn, post_fn, delete_fn):
             api = apigateway.LambdaRestApi(self, "library-api", endpoint_configuration=apigateway.EndpointConfiguration(
             types=[apigateway.EndpointType.REGIONAL]),
                 handler=get_fn,
@@ -61,20 +73,27 @@ class LibraryStack(cdk.Stack):
             get_book_integration = apigateway.LambdaIntegration(get_fn, proxy=False, integration_responses=[apigateway.IntegrationResponse(
                 status_code="200"
                 )])
+            delete_book_integration = apigateway.LambdaIntegration(delete_fn, proxy=False, integration_responses=[apigateway.IntegrationResponse(
+                status_code="200")])
 
             books.add_method("GET", get_book_integration, method_responses=[apigateway.MethodResponse(
             status_code="200"
             )]) # GET /books
             books.add_method("POST", post_book_integration, method_responses=[apigateway.MethodResponse(
             status_code="200"
+            )])
+            books.add_method("DELETE", delete_book_integration, method_responses=[apigateway.MethodResponse(
+            status_code="200"
             )]) 
 
         post_book = post_book()
         get_books = get_books()
-        create_api(get_books, post_book)
+        delete_book = delete_book()
+        create_api(get_books, post_book, delete_book)
 
 
 # CREATE FRONT-END IN FLASK WITH SAM - done
+# create delete functionality
 # PROTECT BACKEND API WITH API KEY
 # IMPLEMENT COGNITO AUTHENTICATION FOR FRONT-END
 # ADD GET AND POST FUNCTIONALITY FOR FRONT END
@@ -84,6 +103,7 @@ class LibraryStack(cdk.Stack):
 # ADD FILTER FOR F or A in search
 # ADD COLUMN FOR BORROWED AND WHO HAS IT
 # Create update book status function 
+# Error handling of functions
 
 # ADD API SECURITY (API KEY? COGNITO?)
 # - https://awskarthik82.medium.com/part-1-securing-aws-api-gateway-using-aws-cognito-oauth2-scopes-410e7fb4a4c0 
