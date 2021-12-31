@@ -10,7 +10,9 @@ def main(event, context):
     # print(response["Items"])
     books = []
     for item in response["Items"]:
-        books.append(item["author"]["S"] + ": " + item["title"]["S"])
+        new_item = {"author": item["author"]["S"],
+                    "title": item["title"]["S"] }
+        books.append(new_item)
     
     print(books)
 
